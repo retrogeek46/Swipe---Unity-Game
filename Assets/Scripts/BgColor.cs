@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class BgColor : MonoBehaviour
 {
-    public Camera mainCamera;
+    public Camera  mainCamera;
     public Color[] bgCol;
-    int index, current, limit;
+    int            index, current, limit;
+    
     // Start is called before the first frame update
     void Start() {
         index = 0;

@@ -6,13 +6,14 @@ using UnityEngine.UI;
 
 public class LoseScreen : MonoBehaviour {
 
-    public Text lossReason;
-    public Text yourScore;
-    public LevelManager lvlManager;
-    public Image highScoreImage;
+    public Text         lossReason;         // textbox to show why the player lost (timeout or wrong swipe)
+    public Text         yourScore;          // textbox to show the score
+    public LevelManager lvlManager;         // reference to levelManager object
+    public Image        highScoreImage;     // Image to show when achieving a highscore
     
     // Start is called before the first frame update
     void Start() {
+        // if on loss scene then set textbox values
         if (SceneManager.GetActiveScene().name == "Lose_Screen") {
             yourScore.text = "You scored " + ScoreManager.score + " points.";
             lossReason.text = ScoreManager.reason;
@@ -22,14 +23,14 @@ public class LoseScreen : MonoBehaviour {
                 highScoreImage.enabled = false;
             }
         }
+        // get reference to the LevelManager
         lvlManager = GameObject.FindObjectOfType<LevelManager>();
     }
 
-    // Update is called once per frame
-    void Update() {
-        
-    }
-
+    /// <summary>
+    /// A wrapper function to call the actual change level function 
+    /// </summary>
+    /// <param name="level">Name of the level</param>
     public void ChangeLevelWrapper(string level) {
         lvlManager.ChangeLevel(level);
     }

@@ -3,17 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ButtonController : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
+	/// <summary>
+	/// A wrapper to rotate the cube based on the direction
+	/// </summary>
+	/// <param name="direction">The direction to rotate in</param>
 	public void Rotate(int direction) {
 		if (!RotateCube.isMoving) {
 			RotateCube.direction = direction;

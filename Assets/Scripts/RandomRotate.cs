@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomRotate : MonoBehaviour
-{
+public class RandomRotate : MonoBehaviour {
 
     private bool isMoving;
     public float sensitivity = 0.7f;
     public int current, limit, index;
     public Color materialColor;
 
-    void Start() {
+    void Start () {
         GetComponent<Renderer>().material.color = materialColor;
         current = 0;
         //limit = 100;
@@ -19,7 +18,7 @@ public class RandomRotate : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update () {
         if (current >= limit) {
             current = 0;
             //UnityEngine.Random.InitState(current);
@@ -39,7 +38,13 @@ public class RandomRotate : MonoBehaviour
         current++;
     }
 
-    IEnumerator Rotate(int xAngle, int yAngle) {
+    /// <summary>
+	/// An enumerator to rotate the cube based on x and y direction (both take values -1, 0 or +1)
+	/// </summary>
+	/// <param name="x">rotate left (1) or right (-1)</param>
+	/// <param name="y">rotate up   (1) and down (-1)</param>
+	/// <returns></returns>
+    IEnumerator Rotate (int xAngle, int yAngle) {
         //cube.transform.rotation = Quaternion.identity;
         Quaternion finalRotation = transform.rotation * Quaternion.Euler((90 * xAngle), (90 * yAngle), 0);
         while (transform.rotation != finalRotation) {

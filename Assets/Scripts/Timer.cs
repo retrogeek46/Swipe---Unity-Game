@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour {
 
-    public Slider timiLimitSlider;
-    public float limit;
-    public float current;
-    public float sliderValue;
+    public Slider timiLimitSlider;      // reference to the slider 
+    public float  limit;                // the time limit
+    public float  current;              // the current time
+    public float  sliderValue;          // value of the slider based on current time and the time limit
     
     // Start is called before the first frame update
     void Start() {

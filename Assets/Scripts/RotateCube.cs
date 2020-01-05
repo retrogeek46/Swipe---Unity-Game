@@ -16,8 +16,8 @@ public class RotateCube : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		// if player has swiped then check direction and rotate cube
 		if (doMove) {
-			//Debug.Log("move is true");
 			doMove = false;
 			switch (direction) {
 				case 0:
@@ -36,17 +36,20 @@ public class RotateCube : MonoBehaviour {
 		}
 	}
 
-	IEnumerator Rotate(int xAngle, int yAngle) {
+	/// <summary>
+	/// An enumerator to rotate the cube based on x and y direction (both take values -1, 0 or +1)
+	/// </summary>
+	/// <param name="x">rotate left (1) or right (-1)</param>
+	/// <param name="y">rotate up   (1) and down (-1)</param>
+	/// <returns></returns>
+	IEnumerator Rotate (int x, int y) {
 		isMoving = true;
 		transform.rotation = Quaternion.identity;
-		Quaternion finalRotation = transform.rotation * Quaternion.Euler((90 * xAngle), (90 * yAngle), 0);
+		Quaternion finalRotation = transform.rotation * Quaternion.Euler((90 * x), (90 * y), 0);
 		while(transform.rotation != finalRotation) { 
 			transform.rotation = Quaternion.Lerp(transform.rotation, finalRotation, sensitivity);
 			yield return new WaitForSeconds(0.01f);
 		}
 		isMoving = false;
-        //if (ScoreManager.isCorrect == true) {
-        //    TextureManager.doChange = true;
-        //}
     }
 }
