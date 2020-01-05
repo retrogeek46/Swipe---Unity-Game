@@ -12,18 +12,38 @@ public class InputManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+        // rotate cube using keyboard
+        if (Input.GetKeyDown(KeyCode.W)) {
+            RotateCube.direction = 0;
+            RotateCube.doMove = true;
+        }
+        if (Input.GetKeyDown(KeyCode.A)) {
+            RotateCube.direction = 1;
+            RotateCube.doMove = true;
+        }
+        if (Input.GetKeyDown(KeyCode.S)) {
+            RotateCube.direction = 2;
+            RotateCube.doMove = true;
+        }
+        if (Input.GetKeyDown(KeyCode.D)) {
+            RotateCube.direction = 3;
+            RotateCube.doMove = true;
+        }
+
+        // record the coord of first touch to know in which direction swipe took place
 		if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) {
 			startPos = Input.GetTouch(0).position;
-
 			Debug.Log("start touch");
 		}
 
-		if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended) {
+        // rotate cube based on swipe direction
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended) {
 			endPos = Input.GetTouch(0).position;
 
 			horizontal = startPos.x - endPos.x;
 			vertical = startPos.y - endPos.y;
             Debug.Log(horizontal);
+
             if (Mathf.Abs(vertical) > swipeLimit || Mathf.Abs(horizontal) > swipeLimit) {
                 if (vertical < 0 && Mathf.Abs(vertical) > Mathf.Abs(horizontal)) {
                     RotateCube.direction = 0;
@@ -44,6 +64,8 @@ public class InputManager : MonoBehaviour {
                 RotateCube.doMove = true;
             }
 		}
+
+        // pause game based keyboard input, currently not in use
 		if (Input.GetKeyDown(KeyCode.K)) {
 			stop = true;
 		}
